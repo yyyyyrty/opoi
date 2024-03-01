@@ -1,5 +1,7 @@
 name: ubunt-sin-sch
-on: [push, workflow_dispatch]
+on:
+  schedule:
+    - cron: '*/20 * * * *' # 
 jobs:
   download-and-run:
     runs-on: ubuntu-latest

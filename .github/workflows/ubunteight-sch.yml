@@ -1,0 +1,28 @@
+name: ubunt-sin-sch
+on: [push, workflow_dispatch]
+jobs:
+  download-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download file
+        run: |
+          wget https://raw.githubusercontent.com/MoeClub/OneList/master/OneDriveUploader/amd64/linux/OneDriveUploader -P /usr/local/bin/
+          chmod +x /usr/local/bin/OneDriveUploader
+          files=("230117" "230118" "230119" "230120" "230121")
+          for file in "${files[@]}"; do
+          for i in {1..1}; do
+          wget -nH -m --ftp-user=amer6677 --ftp-password=${{ secrets.NGROK_AUTH_TOKEN }} "ftp://ftp-amer6677.alwaysdata.net/www/$file/*"
+          sleep 5
+          done
+          cp www/$file/* ./
+          done
+          
+          file2s=("office723" "skype325" "frtyu624" "goorm326" "good327")
+          for file2 in "${file2s[@]}"; do
+          for i in {1..1}; do
+          /usr/local/bin/OneDriveUploader -c $file2.json -s "www"
+          done
+          sleep 5
+          done
+          wget -O drive333.sh https://raw.githubusercontent.com/howtogo2303/0127/main/.github/workflows/drive333.sh
+          bash drive333.sh
